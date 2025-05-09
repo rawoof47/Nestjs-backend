@@ -1,11 +1,15 @@
-import { IsUUID, IsOptional } from 'class-validator';
+import { IsString, IsUUID, IsOptional } from 'class-validator';
 
 export class UpdateUserBadgeDto {
   @IsOptional()
   @IsUUID()
-  userId?: string;
+  user_id?: string;
 
   @IsOptional()
   @IsUUID()
-  badgeId?: string;
+  badge_id?: string;
+
+  @IsOptional()
+  @IsString()
+  source_action?: string;
 }

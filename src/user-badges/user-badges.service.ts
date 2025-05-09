@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserBadge } from './entities/user-badge.entity';
 import { CreateUserBadgeDto } from './dto/create-user-badge.dto';
+import { UpdateUserBadgeDto } from './dto/update-user-badge.dto';
 
 @Injectable()
 export class UserBadgesService {
@@ -11,17 +12,29 @@ export class UserBadgesService {
     private readonly userBadgeRepository: Repository<UserBadge>,
   ) {}
 
-  async create(createUserBadgeDto: CreateUserBadgeDto) {
-    // Create a new UserBadge from DTO
+  // Create a new user badge
+  create(createUserBadgeDto: CreateUserBadgeDto) {
     const userBadge = this.userBadgeRepository.create(createUserBadgeDto);
-    return await this.userBadgeRepository.save(userBadge);
+    return this.userBadgeRepository.save(userBadge);
   }
 
-  async findAll() {
-    return await this.userBadgeRepository.find();
+  // Get all user badges
+  findAll() {
+    return this.userBadgeRepository.find();
   }
 
-  async findOne(id: string) {
-    return await this.userBadgeRepository.findOne({ where: { id } });
+  // Get a user badge by ID
+  findOne(id: string) {
+    return this.userBadgeRepository.findOne({ where: { id } });
+  }
+
+  // Update a user badge
+  update(id: string, updateUserBadgeDto: UpdateUserBadgeDto) {
+    return this.userBadgeRepository.update(id, updateUserBadgeDto);
+  }
+
+  // Delete a user badge
+  remove(id: string) {
+    return this.userBadgeRepository.delete(id);
   }
 }

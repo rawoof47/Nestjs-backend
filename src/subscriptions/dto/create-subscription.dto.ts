@@ -1,10 +1,32 @@
-import { IsString, IsUUID } from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsDateString } from 'class-validator';
 
 export class CreateSubscriptionDto {
   @IsString()
-  @IsUUID()
-  userId: string;
+  user_id: string;
 
   @IsString()
-  subscriptionPlan: string;
+  plan_name: string;
+
+  @IsOptional()
+  @IsString()
+  features?: string;
+
+  @IsOptional()
+  @IsNumber()
+  price?: number;
+
+  @IsDateString()
+  start_date: string;
+
+  @IsOptional()
+  @IsDateString()
+  end_date?: string;
+
+  @IsOptional()
+  @IsString()
+  status?: string;
+
+  @IsOptional()
+  @IsString()
+  payment_reference?: string;
 }
