@@ -5,14 +5,27 @@ export class Application {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  userId: string;
+  @Column({ type: 'char', length: 36 })
+  candidate_id: string;
 
-  @Column()
-  jobId: string;
+  @Column({ type: 'char', length: 36 })
+  job_id: string;
 
-  @Column()
-  status: string;
+  @Column({ type: 'char', length: 36, nullable: true })
+  application_status_id: string | null;
 
-  // Add other columns as per your requirements
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  applied_on: Date;
+
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  updated_on: Date;
+
+  @Column({ type: 'tinyint', width: 1, default: () => '0' })
+  withdrawn: boolean;
+
+  @Column({ type: 'char', length: 36, nullable: true })
+  created_by: string | null;
+
+  @Column({ type: 'char', length: 36, nullable: true })
+  updated_by: string | null;
 }
