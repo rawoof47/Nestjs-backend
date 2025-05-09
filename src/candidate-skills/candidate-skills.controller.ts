@@ -1,6 +1,15 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Patch,
+  Delete,
+} from '@nestjs/common';
 import { CandidateSkillsService } from './candidate-skills.service';
-import { CreateCandidateSkillDto } from './dto/index';
+import { CreateCandidateSkillDto } from './dto/create-candidate-skill.dto';
+import { UpdateCandidateSkillDto } from './dto/update-candidate-skill.dto';
 
 @Controller('candidate-skills')
 export class CandidateSkillsController {
@@ -19,5 +28,18 @@ export class CandidateSkillsController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.candidateSkillsService.findOne(id);
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateCandidateSkillDto: UpdateCandidateSkillDto,
+  ) {
+    return this.candidateSkillsService.update(id, updateCandidateSkillDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.candidateSkillsService.remove(id);
   }
 }

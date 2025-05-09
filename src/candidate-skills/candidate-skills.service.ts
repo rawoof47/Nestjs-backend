@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CandidateSkill } from './entities/candidate-skill.entity';  // Corrected import path
-import { CreateCandidateSkillDto } from './dto/create-candidate-skill.dto';  // Assuming DTO is located in the dto folder
+import { CandidateSkill } from './entities/candidate-skill.entity';
+import { CreateCandidateSkillDto } from './dto/create-candidate-skill.dto';
+import { UpdateCandidateSkillDto } from './dto/update-candidate-skill.dto';
 
 @Injectable()
 export class CandidateSkillsService {
@@ -11,7 +12,7 @@ export class CandidateSkillsService {
     private readonly candidateSkillRepository: Repository<CandidateSkill>,
   ) {}
 
-  create(createCandidateSkillDto: CreateCandidateSkillDto) {
+  async create(createCandidateSkillDto: CreateCandidateSkillDto) {
     const candidateSkill = this.candidateSkillRepository.create(createCandidateSkillDto);
     return this.candidateSkillRepository.save(candidateSkill);
   }
@@ -20,7 +21,22 @@ export class CandidateSkillsService {
     return this.candidateSkillRepository.find();
   }
 
-  findOne(id: string) {
-    return this.candidateSkillRepository.findOne({ where: { id } });  // Added findOne method
+  async findOne(id: string) {
+    const skill = await this.candidateSkillRepository.findOne({ where: { id } });
+    if (!skill) {
+      throw new NotFoundException('Candidate skill not found');
+    }
+    return skill;
+  }
+
+  async update(id: string, updateDto: UpdateCandidateSkillDto) {
+    const skill = await this.findOne(id);
+    Object.assign(skill, updateDto);
+    return this.candidateSkillRepository.save(skill);
+  }
+
+  async remove(id: string) {
+    const skill = await this.findOne(id);
+    return this.candidateSkillRepository.remove(skill);
   }
 }
