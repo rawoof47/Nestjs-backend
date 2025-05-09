@@ -1,17 +1,19 @@
-export class RewardPointEntity {}
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity()
-export class RewardPoint {
-  @PrimaryGeneratedColumn('uuid')
-  userId: string;
+@Entity('reward_points')
+export class RewardPoints {
+  @PrimaryColumn({ type: 'char', length: 36 })
+  user_id: string;
 
-  @Column('int', { default: 0 })
-  totalPoints: number;
+  @Column({ type: 'int', default: 0 })
+  total_points: number;
 
-  @Column('int', { default: 0 })
-  lifetimePoints: number;
+  @Column({ type: 'int', default: 0 })
+  lifetime_points: number;
 
-  @Column('datetime', { default: () => 'CURRENT_TIMESTAMP' })
-  lastUpdated: Date;
+  @CreateDateColumn({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  created_at: Date;
+
+  @UpdateDateColumn({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  last_updated: Date;
 }

@@ -1,14 +1,20 @@
-import { IsUUID, IsInt, Min } from 'class-validator';
+import { IsString, IsInt, IsOptional, IsDate } from 'class-validator';
 
-export class CreateRewardPointDto {
-  @IsUUID()
-  userId: string;
-
-  @IsInt()
-  @Min(0)
-  totalPoints: number;
+export class CreateRewardPointsDto {
+  @IsString()
+  user_id: string;
 
   @IsInt()
-  @Min(0)
-  lifetimePoints: number;
+  total_points: number;
+
+  @IsInt()
+  lifetime_points: number;
+
+  @IsOptional()
+  @IsDate()
+  created_at?: Date;
+
+  @IsOptional()
+  @IsDate()
+  last_updated?: Date;
 }

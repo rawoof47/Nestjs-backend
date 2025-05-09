@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RewardPoints } from './entities/reward-point.entity';
 import { RewardPointsService } from './reward-points.service';
 import { RewardPointsController } from './reward-points.controller';
-import { RewardPoint } from './entities/reward-point.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([RewardPoint])],
-  controllers: [RewardPointsController],
+  imports: [TypeOrmModule.forFeature([RewardPoints])],
   providers: [RewardPointsService],
+  controllers: [RewardPointsController],
 })
 export class RewardPointsModule {}
