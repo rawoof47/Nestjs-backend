@@ -4,4 +4,8 @@ export class UpdateStatusCategoryDto {
   @IsOptional()
   @IsString()
   categoryName?: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
 }

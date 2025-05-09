@@ -1,30 +1,42 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { StatusCategory } from './entities/status-category.entity';
-import { CreateStatusCategoryDto } from './dto';
+import { CreateStatusCategoryDto } from './dto/create-status-category.dto';
+import { UpdateStatusCategoryDto } from './dto/update-status-category.dto';
 
 @Injectable()
 export class StatusCategoriesService {
   constructor(
     @InjectRepository(StatusCategory)
-    private readonly statusCategoryRepository: Repository<StatusCategory>,
+    private readonly statusCategoryRepo: Repository<StatusCategory>,
   ) {}
 
   create(dto: CreateStatusCategoryDto) {
-    const category = this.statusCategoryRepository.create(dto as Partial<StatusCategory>);
-    return this.statusCategoryRepository.save(category);
+    const newCategory = this.statusCategoryRepo.create(dto);
+    return this.statusCategoryRepo.save(newCategory);
   }
 
   findAll() {
-    return this.statusCategoryRepository.find();
+    return this.statusCategoryRepo.find();
   }
 
-  findOne(id: string) {
-    return this.statusCategoryRepository.findOne({ where: { id } });
+  async findOne(id: string) {
+    const category = await this.statusCategoryRepo.findOne({ where: { id } });
+    if (!category) {
+      throw new NotFoundException(`StatusCategory with ID ${id} not found`);
+    }
+    return category;
   }
 
-  remove(id: string) {
-    return this.statusCategoryRepository.delete(id);
+  async update(id: string, dto: UpdateStatusCategoryDto) {
+    const category = await this.findOne(id);
+    Object.assign(category, dto);
+    return this.statusCategoryRepo.save(category);
+  }
+
+  async remove(id: string) {
+    const category = await this.findOne(id);
+    return this.statusCategoryRepo.remove(category);
   }
 }
