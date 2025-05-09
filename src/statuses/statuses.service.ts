@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Status } from './entities/status.entity';
-import { CreateStatusDto } from './dto';
+import { CreateStatusDto } from './dto/create-status.dto';
+import { UpdateStatusDto } from './dto/update-status.dto';
 
 @Injectable()
 export class StatusesService {
@@ -11,8 +12,8 @@ export class StatusesService {
     private readonly statusRepository: Repository<Status>,
   ) {}
 
-  create(dto: CreateStatusDto) {
-    const status = this.statusRepository.create(dto as Partial<Status>);
+  create(createStatusDto: CreateStatusDto) {
+    const status = this.statusRepository.create(createStatusDto);
     return this.statusRepository.save(status);
   }
 
@@ -20,11 +21,23 @@ export class StatusesService {
     return this.statusRepository.find();
   }
 
-  findOne(id: string) {
-    return this.statusRepository.findOne({ where: { id } });
+  async findOne(id: string) {
+    const status = await this.statusRepository.findOne({ where: { id } });
+    if (!status) throw new NotFoundException('Status not found');
+    return status;
   }
 
-  remove(id: string) {
-    return this.statusRepository.delete(id);
+  async update(id: string, updateStatusDto: UpdateStatusDto) {
+    const status = await this.statusRepository.preload({
+      id,
+      ...updateStatusDto,
+    });
+    if (!status) throw new NotFoundException('Status not found');
+    return this.statusRepository.save(status);
+  }
+
+  async remove(id: string) {
+    const status = await this.findOne(id);
+    return this.statusRepository.remove(status);
   }
 }

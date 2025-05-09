@@ -1,6 +1,13 @@
-import { IsString } from 'class-validator';
+import { IsString, IsUUID, IsOptional } from 'class-validator';
 
 export class CreateStatusDto {
   @IsString()
-  statusName: string;
+  status_name: string;
+
+  @IsUUID()
+  status_category_id: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
 }
