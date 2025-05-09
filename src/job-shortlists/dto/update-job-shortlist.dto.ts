@@ -1,13 +1,23 @@
-import { IsString, IsUUID, IsOptional } from 'class-validator';
+import { IsString, IsOptional, IsUUID } from 'class-validator';
 
 export class UpdateJobShortlistDto {
   @IsOptional()
-  @IsString()
   @IsUUID()
-  jobPostId?: string;
+  job_id?: string;
+
+  @IsOptional()
+  @IsUUID()
+  recruiter_id?: string;
+
+  @IsOptional()
+  @IsUUID()
+  candidate_id?: string;
 
   @IsOptional()
   @IsString()
-  @IsUUID()
-  candidateId?: string;
+  notes?: string;
+
+  @IsOptional()
+  @IsString()
+  labels?: string;
 }

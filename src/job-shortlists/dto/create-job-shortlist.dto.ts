@@ -1,11 +1,20 @@
-import { IsString, IsUUID } from 'class-validator';
+import { IsString, IsUUID, IsOptional } from 'class-validator';
 
 export class CreateJobShortlistDto {
-  @IsString()
   @IsUUID()
-  jobPostId: string;
+  job_id: string;
 
-  @IsString()
   @IsUUID()
-  candidateId: string;
+  recruiter_id: string;
+
+  @IsUUID()
+  candidate_id: string;
+
+  @IsOptional()
+  @IsString()
+  notes: string;
+
+  @IsOptional()
+  @IsString()
+  labels: string;
 }
