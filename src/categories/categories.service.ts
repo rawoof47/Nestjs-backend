@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Category } from './entities/category.entity';
-import { CreateCategoryDto } from './dto';
-import { plainToClass } from 'class-transformer';
+import { CreateCategoryDto } from './dto/create-category.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoriesService {
@@ -14,8 +14,7 @@ export class CategoriesService {
 
   // Create a new category
   create(createCategoryDto: CreateCategoryDto) {
-    // Transform CreateCategoryDto to Category entity using plainToClass
-    const category = plainToClass(Category, createCategoryDto);
+    const category = this.categoryRepository.create(createCategoryDto);
     return this.categoryRepository.save(category);
   }
 
@@ -25,7 +24,20 @@ export class CategoriesService {
   }
 
   // Get category by ID
-  findOne(id: string) {
-    return this.categoryRepository.findOne({ where: { id } });
+  async findOne(id: string) {
+    const category = await this.categoryRepository.findOne({ where: { id } });
+    if (!category) {
+      throw new NotFoundException(`Category with ID ${id} not found`);
+    }
+    return category;
+  }
+
+  // Update an existing category
+  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+    const category = await this.findOne(id);
+    if (updateCategoryDto.category_name) {
+      category.category_name = updateCategoryDto.category_name;
+    }
+    return this.categoryRepository.save(category);
   }
 }
