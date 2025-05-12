@@ -1,12 +1,17 @@
-import { IsString, IsUUID, IsDateString } from 'class-validator';
+import { IsString, IsUUID, IsOptional, IsInt } from 'class-validator';
 
 export class CreateActivityLogDto {
   @IsUUID()
-  userId: string;
+  user_id: string;
 
   @IsString()
-  action: string;
+  action_type: string;
 
-  @IsDateString()
-  timestamp: string; // Assuming the entity has a timestamp field
+  @IsOptional()
+  @IsString()
+  metadata?: string;
+
+  @IsOptional()
+  @IsInt()
+  points_awarded?: number;
 }

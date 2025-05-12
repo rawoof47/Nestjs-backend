@@ -1,16 +1,22 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm';
 
-@Entity()
+@Entity('activity_logs')
 export class ActivityLog {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryColumn('char', { length: 36 })
+  id: string; // Will be manually set or auto-generated in DB with uuid()
 
-  @Column()
-  userId: string;
+  @Column('char', { length: 36 })
+  user_id: string;
 
-  @Column()
-  action: string;
+  @Column({ type: 'varchar', length: 100 })
+  action_type: string;
 
-  @Column()
-  timestamp: string;
+  @Column({ type: 'longtext', nullable: true })
+  metadata: string | null;
+
+  @Column({ type: 'int', default: 0 })
+  points_awarded: number;
+
+  @CreateDateColumn({ type: 'datetime' })
+  created_at: Date;
 }

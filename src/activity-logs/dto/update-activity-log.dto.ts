@@ -1,7 +1,15 @@
-import { IsString, IsOptional } from 'class-validator';
+import { IsString, IsOptional, IsInt } from 'class-validator';
 
 export class UpdateActivityLogDto {
-  @IsString()
   @IsOptional()
-  description?: string; // Example field
+  @IsString()
+  action_type?: string;
+
+  @IsOptional()
+  @IsString()
+  metadata?: string;
+
+  @IsOptional()
+  @IsInt()
+  points_awarded?: number;
 }
