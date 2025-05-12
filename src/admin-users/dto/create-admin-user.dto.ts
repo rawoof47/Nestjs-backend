@@ -1,15 +1,18 @@
-import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
+import { IsUUID, IsOptional, IsString } from 'class-validator';
 
 export class CreateAdminUserDto {
-  @IsString()
-  @IsNotEmpty()
-  username: string;
+  @IsUUID()
+  user_id: string;
 
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
-
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  password: string;
+  role_level?: string;
+
+  @IsOptional()
+  @IsString()
+  assigned_sections?: string;
+
+  @IsOptional()
+  @IsString()
+  status?: string;
 }
