@@ -1,12 +1,19 @@
-import { IsString, IsUUID, IsOptional } from 'class-validator';
+import { IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class UpdateOracleModuleDto {
   @IsOptional()
   @IsString()
-  @IsUUID()
-  statusId?: string;
+  module_name?: string;
 
   @IsOptional()
-  @IsString()
-  moduleName?: string;
+  @IsUUID()
+  category_id?: string;
+
+  @IsOptional()
+  @IsUUID()
+  status_id?: string;
+
+  @IsOptional()
+  @IsUUID()
+  updated_by?: string;
 }

@@ -2,9 +2,14 @@ import { IsString, IsUUID } from 'class-validator';
 
 export class CreateOracleModuleDto {
   @IsString()
-  @IsUUID()
-  statusId: string;
+  module_name: string;
 
-  @IsString()
-  moduleName: string;
+  @IsUUID()
+  category_id: string;
+
+  @IsUUID()
+  status_id: string;
+
+  @IsUUID()
+  created_by: string;
 }

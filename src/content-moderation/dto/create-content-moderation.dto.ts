@@ -1,13 +1,18 @@
-import { IsString, IsUUID } from 'class-validator';
+import { IsUUID, IsOptional, IsString } from 'class-validator';
 
 export class CreateContentModerationDto {
-  @IsString()
   @IsUUID()
-  contentId: string;
+  content_id: string;
 
+  @IsOptional()
   @IsString()
-  reviewedBy: string;
+  content_type?: string;
 
+  @IsOptional()
+  @IsUUID()
+  flagged_by?: string;
+
+  @IsOptional()
   @IsString()
-  flaggedBy: string;
+  reason?: string;
 }
