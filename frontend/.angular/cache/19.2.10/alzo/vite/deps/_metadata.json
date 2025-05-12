@@ -1,0 +1,67 @@
+{
+  "hash": "ece51289",
+  "configHash": "a68c180a",
+  "lockfileHash": "ccbe02ca",
+  "browserHash": "842926a0",
+  "optimized": {
+    "@angular/common": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "e745f39a",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "3aca7dbc",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "f72e18d9",
+      "needsInterop": false
+    },
+    "@angular/platform-browser/animations/async": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/animations/async.mjs",
+      "file": "@angular_platform-browser_animations_async.js",
+      "fileHash": "80f94ae8",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "2da9e036",
+      "needsInterop": false
+    },
+    "ngx-owl-carousel-o": {
+      "src": "../../../../../../node_modules/ngx-owl-carousel-o/fesm2022/ngx-owl-carousel-o.mjs",
+      "file": "ngx-owl-carousel-o.js",
+      "fileHash": "9db8a162",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-XQSSZ3K5": {
+      "file": "chunk-XQSSZ3K5.js"
+    },
+    "chunk-MNFWNDPH": {
+      "file": "chunk-MNFWNDPH.js"
+    },
+    "chunk-7PYPTAQD": {
+      "file": "chunk-7PYPTAQD.js"
+    },
+    "chunk-WYFS4QMD": {
+      "file": "chunk-WYFS4QMD.js"
+    },
+    "browser-X7CIN76H": {
+      "file": "browser-X7CIN76H.js"
+    },
+    "chunk-AIHE54WH": {
+      "file": "chunk-AIHE54WH.js"
+    },
+    "chunk-BBV5N7BR": {
+      "file": "chunk-BBV5N7BR.js"
+    }
+  }
+}
