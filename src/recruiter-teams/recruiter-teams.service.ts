@@ -2,29 +2,36 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RecruiterTeam } from './entities/recruiter-team.entity';
-import { CreateRecruiterTeamDto } from './dto';
+import { CreateRecruiterTeamDto } from './dto/create-recruiter-team.dto';
+import { UpdateRecruiterTeamDto } from './dto/update-recruiter-team.dto';
 
 @Injectable()
 export class RecruiterTeamsService {
   constructor(
     @InjectRepository(RecruiterTeam)
-    private readonly recruiterTeamRepository: Repository<RecruiterTeam>,
+    private readonly repo: Repository<RecruiterTeam>,
   ) {}
 
-  create(dto: CreateRecruiterTeamDto) {
-    const team = this.recruiterTeamRepository.create(dto as Partial<RecruiterTeam>);
-    return this.recruiterTeamRepository.save(team);
+  create(dto: CreateRecruiterTeamDto): Promise<RecruiterTeam> {
+    const team = this.repo.create(dto);
+    return this.repo.save(team);
   }
 
-  findAll() {
-    return this.recruiterTeamRepository.find();
+  findAll(): Promise<RecruiterTeam[]> {
+    return this.repo.find({ order: { created_at: 'DESC' } });
   }
 
-  findOne(id: string) {
-    return this.recruiterTeamRepository.findOne({ where: { id } });
+  findOne(id: string): Promise<RecruiterTeam> {
+    return this.repo.findOneOrFail({ where: { id } });
   }
 
-  remove(id: string) {
-    return this.recruiterTeamRepository.delete(id);
+  async update(id: string, dto: UpdateRecruiterTeamDto): Promise<RecruiterTeam> {
+    const team = await this.repo.findOneOrFail({ where: { id } });
+    Object.assign(team, dto);
+    return this.repo.save(team);
+  }
+
+  remove(id: string): Promise<void> {
+    return this.repo.delete(id).then(() => undefined);
   }
 }
