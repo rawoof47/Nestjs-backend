@@ -2,26 +2,20 @@ import {
   ActivatedRoute,
   NavigationEnd,
   Router
-} from "./chunk-XQSSZ3K5.js";
-import "./chunk-MNFWNDPH.js";
-import "./chunk-7PYPTAQD.js";
+} from "./chunk-DT4Q5VHZ.js";
+import "./chunk-I6NTAGN7.js";
+import "./chunk-PL6RY3QO.js";
 import {
   CommonModule,
-  DOCUMENT,
   LocationStrategy,
   NgClass,
   NgStyle,
-  NgTemplateOutlet,
-  isPlatformBrowser
-} from "./chunk-WYFS4QMD.js";
+  NgTemplateOutlet
+} from "./chunk-QHEONRY3.js";
 import {
-  animate,
-  sequence,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-AIHE54WH.js";
+  DOCUMENT,
+  isPlatformBrowser
+} from "./chunk-7735HQS3.js";
 import {
   ANIMATION_MODULE_TYPE,
   Attribute,
@@ -104,7 +98,70 @@ import {
   ɵɵsanitizeHtml,
   ɵɵsanitizeUrl,
   ɵɵtemplate
-} from "./chunk-BBV5N7BR.js";
+} from "./chunk-NB4CB6XY.js";
+
+// node_modules/@angular/animations/fesm2022/private_export-faY_wCkZ.mjs
+var AnimationMetadataType;
+(function(AnimationMetadataType2) {
+  AnimationMetadataType2[AnimationMetadataType2["State"] = 0] = "State";
+  AnimationMetadataType2[AnimationMetadataType2["Transition"] = 1] = "Transition";
+  AnimationMetadataType2[AnimationMetadataType2["Sequence"] = 2] = "Sequence";
+  AnimationMetadataType2[AnimationMetadataType2["Group"] = 3] = "Group";
+  AnimationMetadataType2[AnimationMetadataType2["Animate"] = 4] = "Animate";
+  AnimationMetadataType2[AnimationMetadataType2["Keyframes"] = 5] = "Keyframes";
+  AnimationMetadataType2[AnimationMetadataType2["Style"] = 6] = "Style";
+  AnimationMetadataType2[AnimationMetadataType2["Trigger"] = 7] = "Trigger";
+  AnimationMetadataType2[AnimationMetadataType2["Reference"] = 8] = "Reference";
+  AnimationMetadataType2[AnimationMetadataType2["AnimateChild"] = 9] = "AnimateChild";
+  AnimationMetadataType2[AnimationMetadataType2["AnimateRef"] = 10] = "AnimateRef";
+  AnimationMetadataType2[AnimationMetadataType2["Query"] = 11] = "Query";
+  AnimationMetadataType2[AnimationMetadataType2["Stagger"] = 12] = "Stagger";
+})(AnimationMetadataType || (AnimationMetadataType = {}));
+function trigger(name, definitions) {
+  return {
+    type: AnimationMetadataType.Trigger,
+    name,
+    definitions,
+    options: {}
+  };
+}
+function animate(timings, styles = null) {
+  return {
+    type: AnimationMetadataType.Animate,
+    styles,
+    timings
+  };
+}
+function sequence(steps, options = null) {
+  return {
+    type: AnimationMetadataType.Sequence,
+    steps,
+    options
+  };
+}
+function style(tokens) {
+  return {
+    type: AnimationMetadataType.Style,
+    styles: tokens,
+    offset: null
+  };
+}
+function state(name, styles, options) {
+  return {
+    type: AnimationMetadataType.State,
+    name,
+    styles,
+    options
+  };
+}
+function transition(stateChangeExpr, steps, options = null) {
+  return {
+    type: AnimationMetadataType.Transition,
+    expr: stateChangeExpr,
+    animation: steps,
+    options
+  };
+}
 
 // node_modules/@angular/animations/fesm2022/animations.mjs
 var AnimationBuilder = class _AnimationBuilder {
@@ -4488,6 +4545,13 @@ export {
   SlidesOutputData
 };
 /*! Bundled license information:
+
+@angular/animations/fesm2022/private_export-faY_wCkZ.mjs:
+  (**
+   * @license Angular v19.2.9
+   * (c) 2010-2025 Google LLC. https://angular.io/
+   * License: MIT
+   *)
 
 @angular/animations/fesm2022/animations.mjs:
   (**

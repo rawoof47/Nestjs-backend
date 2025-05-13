@@ -7,7 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:alzo": "node dist/alzo/server/server.mjs"
+    "build:ssr": "ng build && ng run alzo:server",
+    "serve:ssr": "node dist/alzo/server/server.mjs",
+    "dev:ssr": "ng run alzo:serve-ssr"
   },
   "private": true,
   "dependencies": {
